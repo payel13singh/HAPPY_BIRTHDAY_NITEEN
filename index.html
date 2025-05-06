@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>♥ My Brave Soldier ♥</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f9ffe3, #ffe0f7);
+      color: #333;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .scrapbook {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #d4b91c;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(97, 7, 52, 0.3);
+      border: 4px dashed #ff4081;
+    }
+
+    .header {
+      text-align: center;
+      background: linear-gradient(to right, #f50057, #880e4f);
+      color: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #c2185b;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 3.5rem;
+      animation: floatText 3s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .page {
+      margin: 50px 0;
+    }
+
+    .content-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      animation: slideIn 1.2s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-30px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .content-flex.reverse {
+      flex-direction: row-reverse;
+      animation: slideInReverse 1.2s ease;
+    }
+
+    @keyframes slideInReverse {
+      from { transform: translateX(30px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .photo {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .photo:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 0 25px #960d3a;
+    }
+
+    .note {
+      flex: 1;
+      background: aqua;
+      padding: 20px;
+      border-left: 6px solid #d81b60;
+      border-radius: 15px;
+      font-style:oblique;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      transition: background 0.3s;
+      color: blue;
+    }
+
+    .note:hover {
+      background: hsl(0, 6%, 90%);
+    }
+
+    .caption {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ad1457;
+      font-size: 30px;
+      background-color: chartreuse;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 34px;
+      color: #ea0f0f;
+      margin-top: 40px;
+      font-style: italic;
+    }
+
+    @media screen and (max-width: 768px) {
+      .content-flex, .content-flex.reverse {
+        flex-direction: column;
+      }
+
+      .photo {
+        width: 90%;
+      }
+    }
+
+
+
+
+
+        
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .shayariContainer {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      border: 3px solid red;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .image-animation {
+      width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .zoom-effect {
+      animation: zoomInOut 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes zoomInOut {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    .shayariText {
+      font-size: 22px;
+      color: red;
+      font-weight: bold;
+      line-height: 1.8;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    video {
+      border: 5px solid pink;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 700px;
+      /* max-height: 500px; */
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+      justify-content: center;
+    
+    }
+
+    
+    .slider {
+      width: 100%;
+      max-width: 600px;
+      height: 90vh;
+      position: relative;
+    }
+
+    .slider img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 1;
+    }
+
+    .slider img.active {
+      opacity: 1;
+    }
+
+    .intro-text {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      color: red;
+      font-size: 26px;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 10px;
+      z-index: 3;
+    
+    }
+
+    .controls button {
+      /* background-color: rgba(255, 255, 255, 0.6); */
+      background-color: blue;
+      border: none;
+      padding: 10px 15px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <div class="scrapbook">
+    <div class="header">
+      <h1>♥ NITEEN (NI3) ♥</h1>
+      <p>To my Soldier — दिल से दूर हो, पर हर साँस में हो 🇮🇳</p>
+    </div>
+    <h1 style="text-align: center; color: crimson; font-family:Arial, Helvetica, sans-serif ; " ><u>ALL Time MY Favrorite PERSON</u></h1>
+
+    <!-- Page 1 -->
+    <div class="page">
+      <div class="content-flex">
+        <img src="ni3.1.jpg" alt="Photo 1" class="photo">
+        <div>
+          <div class="note">
+            पहली बार जब तुम्हें देखा था... दिल वहीं रुक गया था। 💕  
+            <br><br><em><p>Wardi mein tu jo lagta hai, chaand bhi sharma jaaye,
+                Har musibat se tu takraaye, par muskuraye,
+                Niteen, tu sirf fauj ka fakhar nahi, mera pyaar bhi hai,
+                Dil se dua nikalti hai हर बार तेरे लिए,
+                Tu रहे सलामत, यही अरमान बार-बार भी है। 💖</p>"Some hearts wear uniforms, and mine beats for one."</em>
+          </div>
+          <div class="caption">❤️ MY HERO ON DUTY</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page">
+      <div class="content-flex reverse">
+        <img src="ni3.2.jpg" alt="Photo 2" class="photo">
+        <div>
+          <div class="note">
+            जब तुम ड्यूटी पर होते हो, मैं तुम्हारी मुस्कान की याद में जीती हूँ।
+            <br><br><em>"Distance means so little when someone means so much."</em>
+          </div>
+          <div class="caption">💌 Tere Bina Har Lamha Adhoora</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page">
+      <div class="content-flex">
+        <img src="ni3.3.jpg" alt="Photo 3" class="photo">
+        <div>
+          <div class="note">
+            तुम फौलाद जैसे हो बाहर से, लेकिन मेरे लिए एक नर्म दिल वाले प्यारे इंसान हो।  
+            <br><br><em>"My hero wears camouflage and carries love."</em>
+          </div>
+          <div class="caption">🪖 "Apke  नाम से ही दिल को सुकून मिलता है..."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 4 -->
+    <div class="page">
+      <div class="content-flex reverse">
+        <img src="ni3.4.jpg" alt="Photo 4" class="photo">
+        <div>
+          <div class="note">
+            हर तिरंगे की सलामी में मुझे तुम्हारी शान दिखती है।
+            <br><br><em>"Teri mitti mein mil jaawan..." 🎶</em>
+          </div>
+          <div class="caption">🇮🇳 Proud of You, Always!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+        <div class="content-flex">
+          <img src="ni3.5.jpg" alt="Photo 1" class="photo">
+          <div>
+            <div class="note">
+              पहली बार जब तुम्हें देखा था... दिल वहीं रुक गया था। 💕  
+              <br><br><em>"Some hearts wear uniforms, and mine beats for one."</em>
+            </div>
+            <div class="caption">❤️ Meri Pehli Nazar Ka Pyaar</div>
+          </div>
+        </div>
+      </div>
+  
+
+      <div class="page">
+        <div class="content-flex reverse">
+          <img src="ni3.6.jpg" alt="Photo 4" class="photo">
+          <div>
+            <div class="note">
+              
+               
+              <br><br><em>""उसकी वर्दी देख दुनिया सलाम करती है,
+                और मैं उसका नाम सुनकर ही मुस्कुरा देती हूँ।" 🎶</em>
+            </div>
+            <div class="caption">🇮🇳 Proud of You, Always!</div>
+          </div>
+        </div>
+      </div>
+    
+
+
+      <div class="page">
+        <div class="content-flex">
+          <img src="ni3.7.jpg" alt="Photo 1" class="photo">
+          <div>
+            <div class="note">
+             मेरा फौजी नितिन – सरहद का शेर, दिल का राजा।"💕  
+              <br><br><em>"""वो दूर सही, मगर दिल के पास रहता है,
+                वर्दी में मेरा इश्क़ खास रहता है।
+                हर पल दुआ में उसका नाम आता है,
+                मेरा फौजी नितिन, मेरे ख्वाबों में हर शाम आता है।</em>
+            </div>
+            <div class="caption">❤️ "Niteen — दूर रहकर भी सबसे करीब हो!</div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      Designed with 💖 just for you...<br> — तुम्हारी दीवानी<br>Subhchintak N.S 📝
+    </div>
+
+
+    <!-- <button id="showShayariButton">Show Shayari</button> -->
+    <button class="toggleShayariButton" data-container="shayariContainer1">BABY </button>
+    <button class="toggleShayariButton" data-container="shayariContainer2">LITTLE KHARGOSH </button>
+    <button class="toggleShayariButton" data-container="shayariContainer3">JAAN </button>
+     <button class="toggleShayariButton" data-container="shayariContainer4">NI3 </button>
+     <button class="toggleShayariButton" data-container="shayariContainer5">SONA</button>
+
+
+
+<!-- 
+<div style="justify-content: center; padding-left:25%;">
+<h1>❤️ I Love You Forever ❤️</h1>
+
+<video controls autoplay muted loop>
+  <source src="./WhatsApp Video 2025-05-06 at 10.40.32_02ed60e0.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div> -->
+
+
+
+<div id="shayariContainer1" class="shayariContainer">
+  <img src="./ni3.3.jpg" alt="Niteen" class="image-animation"/>
+  <p class="shayariText">Tum meri code ki best function ho,
+    jisme har parameter tumhi ho.
+    
+    Tum bina, toh meri zindagi crash hoti hai,
+    jaise bina backup ke data loss hota hai.
+    
+    Tere saath mera server kabhi timeout nahi karta,
+    aur tumhari muskurahat, mera ping hamesha positive rehta hai.
+    
+    Jab tum saath ho, toh har bug fixed ho jaata hai,
+    aur bina tumhare, har logic flawed lagta hai.
+    
+    Tum meri frontend ki HTML ho,
+    aur main tumhara CSS hoon, jo tumhein perfect banata hoon!
+    
+    Teri aankhon mein woh JavaScript ki tarah magic hai,
+    jab tum dekhte ho, toh mere heart ka loop kabhi infinite nahi hota</p>
+</div>
+
+<div id="shayariContainer2" class="shayariContainer">
+  <img src="./ni3.9.jpg" alt="Niteen" class="image-animation"/>
+  <p class="shayariText">1.Every time i miss u .. i just wish i could hug u tight and never let u go anywhere ....<br>
+  2.baat krne ke liye bht sare log hai but intjaar sirf apke msz and call ka rahta...<br>
+3.baat sirf itni si hai ni3 jo apse hai wo chah kr v kisi se nahi ho sakta<br>4.when i miss u ......i read our old conversations and smile recall our memories and feel u ..
+<br>5.i feel u i miss u every tym ,sec ,min ,hour ...and u have no idea ni3 singh how much i love u ..respect u and kabhi realise hoga v nahi ....</p>
+</div>
+
+<div id="shayariContainer3" class="shayariContainer">
+  <img src="./ni3.6.jpg" alt="Niteen" class="image-animation"/>
+  <p class="shayariText">Tum meri IDE mein auto-complete ki tarah ho,
+    tumhare bina toh koi function complete hi nahi hota.
+    
+    Tumse milke mere variables kabhi undefined nahi hote,
+    har data type mein tum hi ho, jo null nahi hota!
+    
+    Jab tum saath hote ho, toh mera loop kabhi infinite nahi hota,
+    aur jab tum door jaate ho, toh mera stack overflow ho jaata hai.
+    
+    Tum mere code ki best practice ho,
+    aur jab tumhare saath hoon, toh zindagi debugged lagti hai!
+    
+    Tum ho meri framework, jisse meri zindagi responsive hoti hai,
+    bina tumhare style meri duniya unstyled lagti hai</p>
+</div>
+
+<div id="shayariContainer4" class="shayariContainer">
+  <img src="./ni3.2.jpg" alt="Niteen" class="image-animation"/>
+  <p class="shayariText">Tum mere life ke source code ho,
+    jisme har line mein sirf tera naam likha hai.
+    
+    Tera bina toh jaise code compile hi nahi hota,
+    aur har din ek runtime error ban jaata hai.
+    
+    Jab tu muskurata hai,
+    mere system ka CPU 100% pe chala jaata hai.
+    
+    Tere bina toh meri RAM bhi empty lagti hai,
+    aur har process sirf tujhe hi call karta hai.
+    
+    Tu ho meri syntax, tu ho mera logic,
+    tu ho meri zindagi ka perfect output.</p>
+</div>
+
+<div id="shayariContainer5" class="shayariContainer">
+  <img src="./ni3.12.jpg" alt="Niteen" class="image-animation"/>
+  <p class="shayariText">   2022 mein Jiwansathi pe mile the hum, <br>
+    Tere dil mein jagah na thi, phir bhi main tha gum. <br>
+    Tere bina zindagi adhuri si lagti thi, <br>
+    Meri har khushi tujhmein hi samayi thi. <br>
+    Ek tarfa tha pyaar, par kabhi pyaar kam nahi tha, <br>
+    Meri duniya tu hi tha, par tu kabhi samajh nahi paaya. <br>
+    Tere saath chalne ki khwahish thi, par tu na mere saath tha, <br>
+    Meri har ek muskaan mein tu tha, chahe tu mujhse door tha. <br>
+    Dil se tu samajh na paaya, par main apse kabhi door nahi thi, <br>
+    Mera pyaar tere liye kabhi kam nahi tha, ye sach hai meri zindagi ki kahani. <br></p>
+</div>
+
+
+<div style="justify-content: center; padding-left:25%;">
+  <h1>❤️ I Love You Forever ❤️</h1>
+  
+  <video controls autoplay muted loop>
+    <source src="./WhatsApp Video 2025-05-06 at 10.40.32_02ed60e0.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  </div>
+
+
+
+<div class="slider" style="margin-top: 20px;">
+  <!-- Intro text only, no image or audio initially -->
+  <div class="intro-text" id="introText" >  hy Handsome   please click me ..i will show u something special 🤩</div>
+
+  <!-- Hidden initially, shown on click -->
+  <img src="./ni3.1.jpg" data-audio="n1.mp3" />
+  <img src="./ni3.2.jpg" data-audio="n2.mp3" />
+  <img src="./ni3.3.jpg" data-audio="p2.mp3" />
+  <img src="./ni3.4.jpg" data-audio="p1.mp3" />
+  <img src="./ni3.5.jpg" data-audio="v1.mp3" />
+  <img src="./ni3.6.jpg" data-audio="v2.mp3" />
+  <img src="./ni3.7.jpg" data-audio="v3.mp3" />
+  <img src="./ni3.8.jpg" data-audio="v4.mp3" />
+  <img src="./ni3.9.jpg" data-audio="v5.mp3" />
+  <img src="./ni3.10.jpg" data-audio="v6.mp3" />
+  <img src="./ni3.11.jpg" data-audio="v7.mp3" />
+  <img src="./ni3.12.jpg" data-audio="v8.mp3" />
+  <img src="./ni3.13.jpg" data-audio="v9.mp3" />
+  <img src="./ni3.14.jpg" data-audio="vn1(1).mp3" />
+  <img src="./ni3.15.jpg" data-audio="vn1(2).mp3" />
+  <img src="./ni3.6.jpg" data-audio="vn1(3).mp3" />
+
+  <div class="controls">
+    <button id="prevBtn">⟨ Prev</button>
+    <button id="nextBtn">Next ⟩</button>
+  </div>
+</div>
+
+<audio id="sliderAudio" controls autoplay style="display: none;"></audio>
+
+
+
+
+<script>
+  const buttons = document.querySelectorAll('.toggleShayariButton');
+  const containers = document.querySelectorAll('.shayariContainer');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-container');
+
+      containers.forEach(container => {
+        const img = container.querySelector('.image-animation');
+
+        if (container.id === targetId) {
+          const isVisible = container.style.display === 'block';
+          container.style.display = isVisible ? 'none' : 'block';
+
+          if (!isVisible) {
+            img.classList.add('zoom-effect');
+          } else {
+            img.classList.remove('zoom-effect');
+          }
+
+        } else {
+          container.style.display = 'none';
+          container.querySelector('.image-animation').classList.remove('zoom-effect');
+        }
+      });
+    });
+  });
+
+
+  
+  // <script>
+    const images = document.querySelectorAll(".slider img");
+    const audio = document.getElementById("sliderAudio");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const introText = document.getElementById("introText");
+
+    let index = -1; // Start before first image
+
+    function updateSlider() {
+      images.forEach((img, i) => {
+        img.classList.remove("active");
+      });
+
+      if (index >= 0) {
+        introText.style.display = "none"; // Hide intro
+        images[index].classList.add("active");
+
+        const audioSrc = images[index].getAttribute("data-audio");
+        audio.src = audioSrc;
+        audio.style.display = "block";
+        audio.play();
+      } else {
+        introText.style.display = "block";
+        audio.pause();
+        audio.style.display = "none";
+      }
+    }
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % images.length;
+      updateSlider();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + images.length) % images.length;
+      updateSlider();
+    });
+
+    updateSlider(); // Initial state
+  // </script>
+
+</script>
+
+
+</body>
+</html>
